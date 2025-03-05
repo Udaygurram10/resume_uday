@@ -1,5 +1,5 @@
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -9,33 +9,43 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
 const Index = () => {
+  const mainRef = useRef<HTMLElement>(null);
+
   useEffect(() => {
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const href = this.getAttribute('href');
-        if (!href) return;
-        
-        const targetElement = document.querySelector(href);
-        if (!targetElement) return;
-        
-        targetElement.scrollIntoView({
-          behavior: 'smooth'
-        });
+    const handleAnchorClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest('a[href^="#"]');
+      
+      if (!anchor) return;
+      
+      e.preventDefault();
+      
+      const href = anchor.getAttribute('href');
+      if (!href) return;
+      
+      const targetElement = document.querySelector(href);
+      if (!targetElement) return;
+      
+      targetElement.scrollIntoView({
+        behavior: 'smooth'
       });
-    });
+    };
+    
+    // Use event delegation on the main element
+    if (mainRef.current) {
+      mainRef.current.addEventListener('click', handleAnchorClick);
+    }
     
     return () => {
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.removeEventListener('click', () => {});
-      });
+      if (mainRef.current) {
+        mainRef.current.removeEventListener('click', handleAnchorClick);
+      }
     };
   }, []);
   
   return (
-    <main className="overflow-x-hidden">
+    <main ref={mainRef} className="overflow-x-hidden">
       <Navbar />
       <Hero />
       <About />

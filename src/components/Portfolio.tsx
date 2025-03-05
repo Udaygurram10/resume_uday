@@ -1,5 +1,6 @@
 
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, ExternalLink } from "lucide-react";
 
 interface Project {
@@ -174,13 +175,13 @@ const Portfolio = () => {
                     {activeIndex + 1} / {projects.length}
                   </span>
                   
-                  <a
-                    href="#"
+                  <Link
+                    to={`/project/${projects[activeIndex].id}`}
                     className="flex items-center space-x-2 text-brand-cyan hover:underline"
                   >
                     <span>View Details</span>
                     <ExternalLink size={14} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -188,13 +189,13 @@ const Portfolio = () => {
         </div>
         
         <div className="text-center mt-12">
-          <a 
-            href="#" 
+          <Link 
+            to="/project/1"
             className="btn-gradient px-6 py-3 rounded-full inline-flex items-center space-x-2"
           >
             <span>View All Projects</span>
             <ArrowRight size={18} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

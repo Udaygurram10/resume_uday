@@ -1,5 +1,6 @@
 
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { ArrowRight, Clock } from "lucide-react";
 
 interface BlogPost {
@@ -120,13 +121,13 @@ const Blog = () => {
                 <div className="flex justify-between items-center">
                   <span className="text-xs opacity-60">{post.date}</span>
                   
-                  <a 
-                    href="#" 
+                  <Link 
+                    to={`/blog/${post.id}`}
                     className="flex items-center text-brand-cyan hover:underline text-sm font-medium"
                   >
                     <span>Read More</span>
                     <ArrowRight size={14} className="ml-1" />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -134,13 +135,13 @@ const Blog = () => {
         </div>
         
         <div className="text-center mt-12">
-          <a 
-            href="#" 
+          <Link 
+            to="/blog/1"
             className="btn-gradient px-6 py-3 rounded-full inline-flex items-center space-x-2"
           >
             <span>View All Articles</span>
             <ArrowRight size={18} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
