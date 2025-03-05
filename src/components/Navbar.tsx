@@ -27,6 +27,18 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsMenuOpen(false);
+    
+    const targetElement = document.querySelector(href);
+    if (!targetElement) return;
+    
+    targetElement.scrollIntoView({
+      behavior: 'smooth'
+    });
+  };
+
   return (
     <header
       className={cn(
@@ -46,21 +58,34 @@ const Navbar = () => {
           <Link to="/" className="nav-link font-medium">
             Home
           </Link>
-          <Link to="#about" className="nav-link font-medium">
+          <a 
+            href="#about" 
+            className="nav-link font-medium"
+            onClick={(e) => handleNavClick(e, "#about")}
+          >
             About
-          </Link>
-          <Link to="#portfolio" className="nav-link font-medium">
+          </a>
+          <a 
+            href="#portfolio" 
+            className="nav-link font-medium"
+            onClick={(e) => handleNavClick(e, "#portfolio")}
+          >
             Portfolio
-          </Link>
-          <Link to="#blog" className="nav-link font-medium">
+          </a>
+          <a 
+            href="#blog" 
+            className="nav-link font-medium"
+            onClick={(e) => handleNavClick(e, "#blog")}
+          >
             Insights
-          </Link>
-          <Link 
-            to="#contact"
+          </a>
+          <a 
+            href="#contact"
             className="btn-gradient px-5 py-2 rounded-full font-medium hover:shadow-lg transition-shadow"
+            onClick={(e) => handleNavClick(e, "#contact")}
           >
             Contact
-          </Link>
+          </a>
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -88,34 +113,34 @@ const Navbar = () => {
           >
             Home
           </Link>
-          <Link
-            to="#about"
+          <a
+            href="#about"
             className="text-2xl font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, "#about")}
           >
             About
-          </Link>
-          <Link
-            to="#portfolio"
+          </a>
+          <a
+            href="#portfolio"
             className="text-2xl font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, "#portfolio")}
           >
             Portfolio
-          </Link>
-          <Link
-            to="#blog"
+          </a>
+          <a
+            href="#blog"
             className="text-2xl font-medium"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, "#blog")}
           >
             Insights
-          </Link>
-          <Link
-            to="#contact"
+          </a>
+          <a
+            href="#contact"
             className="btn-gradient px-6 py-3 rounded-full text-xl"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={(e) => handleNavClick(e, "#contact")}
           >
             Contact
-          </Link>
+          </a>
         </div>
       </div>
     </header>
